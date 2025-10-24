@@ -1,0 +1,103 @@
+import { User, AuthSession } from "./types";
+
+const STORAGE_KEY = "ticketapp_session";
+
+interface MockUser extends User {
+  password: string; // Stored as hashed value
+}
+
+// Simulated user database
+const MOCK_USERS: MockUser[] = [
+  {
+    id: "1",
+    name: "Demo User",
+    email: "demo@example.com",
+    password: "password123", // Default password for demo user
+  },
+];
+
+export const auth = {
+  login: async (email: string, password: string): Promise<AuthSession> => {
+    // Simulate API call delay
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    // Find user
+    const user = MOCK_USERS.find((u) => u.email === email);
+    if (!user) {
+      throw new Error("Invalid credentials");
+    }
+
+    // Validate password
+    if (user.password !== password) {
+      throw new Error("Invalid credentials");
+    }
+
+    // Create session with public user data (excluding password)
+    const session: AuthSession = {
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      },
+      token: `mock-token-${Date.now()}`,
+    };
+
+    // Store in localStorage
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
+    return session;
+  },
+
+  signup: async (
+    name: string,
+    email: string,
+    password: string
+  ): Promise<AuthSession> => {
+    // Simulate API call delay
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    // Validate password
+    if (password.length < 8) {
+      throw new Error("Password must be at least 8 characters");
+    }
+
+    // Check if user exists
+    if (MOCK_USERS.some((u) => u.email === email)) {
+      throw new Error("User already exists");
+    }
+
+    // Create new user with password
+    const newUser: MockUser = {
+      id: (MOCK_USERS.length + 1).toString(),
+      name,
+      email,
+      password,
+    };
+
+    // Add to mock database
+    MOCK_USERS.push(newUser);
+
+    // Create session
+    const session: AuthSession = {
+      user: newUser,
+      token: `mock-token-${Date.now()}`,
+    };
+
+    // Store in localStorage
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
+    return session;
+  },
+
+  logout: () => {
+    localStorage.removeItem(STORAGE_KEY);
+  },
+
+  getSession: (): AuthSession | null => {
+    const session = localStorage.getItem(STORAGE_KEY);
+    return session ? JSON.parse(session) : null;
+  },
+
+  checkAuth: () => {
+    const session = localStorage.getItem(STORAGE_KEY);
+    return session !== null;
+  },
+};
