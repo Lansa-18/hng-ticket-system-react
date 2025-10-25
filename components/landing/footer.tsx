@@ -6,7 +6,7 @@ export const Footer = () => {
       <div className="container mx-auto px-4 py-12 max-w-[1440px]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">Ticket System</h3>
+            <h3 className="text-xl font-bold mb-4">TrackiT</h3>
             <p className="text-gray-400">
               Streamline your support workflow with our powerful ticket
               management solution.
@@ -41,14 +41,14 @@ export const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact</h4>
             <ul className="space-y-2 text-gray-400">
-              <li>Email: support@ticketsystem.com</li>
+              <li>Email: support@trackiT.com</li>
               <li>Phone: (555) 123-4567</li>
             </ul>
           </div>
         </div>
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
           <p>
-            © {new Date().getFullYear()} Ticket System. All rights reserved.
+            © {new Date().getFullYear()} TrackiT. All rights reserved.
           </p>
         </div>
       </div>
