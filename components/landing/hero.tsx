@@ -11,7 +11,7 @@ export const Hero = () => {
       <div className="absolute -top-10 right-[20%] w-24 h-24 rounded-full bg-blue-300 opacity-20" />
 
       {/* Animated circle with gradient */}
-      <div className="absolute top-1/4 right-1/3 w-72 h-72 rounded-full bg-linear-to-r from-white/20 to-blue-400/20 animate-pulse" />
+      <div className="absolute top-1/4 right-1/3 w-72 h-72 rounded-full bg-linear-to-r from-white/10 to-blue-400/10 animate-pulse" />
 
       <div className="container mx-auto px-4 relative z-10 text-center text-white max-w-[1440px]">
         <h1 className="text-5xl md:text-6xl font-bold mb-6">TrackiT</h1>

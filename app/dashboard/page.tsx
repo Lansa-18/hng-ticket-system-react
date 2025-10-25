@@ -71,7 +71,7 @@ export default function DashboardPage() {
         </div>
         <div className="bg-white shadow-sm rounded-lg p-4 sm:p-6">
           <h3 className="text-sm sm:text-lg font-medium text-gray-900">
-            Closed
+            Resolved
           </h3>
           <p className="text-2xl sm:text-3xl font-bold text-grey-700 mt-2">
             {loading ? "..." : stats.closed}
