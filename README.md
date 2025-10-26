@@ -127,31 +127,4 @@ Email: demo@example.com
 Password: password123
 ```
 
-## 🐛 Known Issues and Limitations
-
-1. **Authentication**
-
-   - Uses mock authentication (localStorage)
-   - No password recovery implementation yet
-
-2. **Data Persistence**
-
-   - Currently uses localStorage for data storage
-   - No backend integration yet
-
-3. **Performance**
-   - Large ticket lists may need pagination
-   - Image optimization pending
-
-## 🔜 Future Improvements
-
-1. Backend integration with proper API
-2. Real-time updates using WebSocket
-3. File attachment support for tickets
-4. Advanced filtering and search
-5. User roles and permissions
-6. Email notifications
-7. Dark mode support
-8. Analytics dashboard
-
 Built using Next.js and React
