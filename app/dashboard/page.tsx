@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/lib/auth-provider";
-import { ticketService } from "@/lib/tickets";
+import { ticketService, Ticket } from "@/lib/tickets";
 
 export default function DashboardPage() {
   const { user } = useAuth();
@@ -13,24 +13,29 @@ export default function DashboardPage() {
     inProgress: 0,
     closed: 0,
   });
+  const [tickets, setTickets] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchStats = async () => {
+    const fetchData = async () => {
       if (user) {
         setLoading(true);
         try {
-          const statsData = await ticketService.getTicketStats(user.id);
+          const [statsData, ticketsData] = await Promise.all([
+            ticketService.getTicketStats(user.id),
+            ticketService.getTickets(user.id),
+          ]);
           setStats(statsData);
+          setTickets(ticketsData);
         } catch (error) {
-          console.error("Failed to fetch ticket stats:", error);
+          console.error("Failed to fetch dashboard data:", error);
         } finally {
           setLoading(false);
         }
       }
     };
 
-    fetchStats();
+    fetchData();
   }, [user]);
 
   return (
@@ -101,10 +106,40 @@ export default function DashboardPage() {
               No tickets found. Create your first ticket to get started.
             </div>
           ) : (
-            <div className="text-sm sm:text-base text-gray-600">
-              You have {stats.open} open ticket{stats.open !== 1 ? "s" : ""}{" "}
-              that need{stats.open === 1 ? "s" : ""} attention.
-            </div>
+            <>
+              <div className="text-sm sm:text-base text-gray-600 mb-4">
+                You have {stats.open} open ticket{stats.open !== 1 ? "s" : ""}{" "}
+                that need{stats.open === 1 ? "s" : ""} attention.
+              </div>
+              <div className="space-y-3">
+                {tickets.map((ticket) => (
+                  <div
+                    key={ticket.id}
+                    className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                  >
+                    <div className="flex-1">
+                      <h3 className="font-medium text-gray-900">
+                        {ticket.title}
+                      </h3>
+                      <p className="text-sm text-gray-600 mt-1">
+                        {ticket.description}
+                      </p>
+                    </div>
+                    <div
+                      className={`px-3 py-1 text-sm font-medium rounded-full ${
+                        ticket.status === "open"
+                          ? "bg-green-100 text-green-800"
+                          : ticket.status === "in-progress"
+                            ? "bg-yellow-100 text-yellow-800"
+                            : "bg-gray-100 text-gray-800"
+                      }`}
+                    >
+                      {ticket.status}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </div>
