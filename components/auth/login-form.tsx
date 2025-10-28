@@ -36,15 +36,12 @@ export function LoginForm() {
   const onSubmit = async (data: LoginFormValues) => {
     setIsLoading(true);
     try {
-      // Login and wait for it to complete
       await auth.login(data.email, data.password);
 
-      // Verify the session was created
       if (!auth.checkAuth()) {
         throw new Error("Failed to create session");
       }
 
-      // Show success message
       toast.success("Logged in successfully!");
       window.location.href = "/dashboard";
     } catch (error) {
@@ -97,8 +94,8 @@ export function LoginForm() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 py-2 px-1 text-center sm:text-left">
+          <div className="flex items-center justify-center sm:justify-start space-x-2">
             <Checkbox id="remember-me" />
             <Label
               htmlFor="remember-me"
@@ -108,10 +105,10 @@ export function LoginForm() {
             </Label>
           </div>
 
-          <div className="text-sm">
+          <div className="text-sm mt-2 sm:mt-0">
             <Link
               href="/auth/reset-password"
-              className="font-medium text-primary hover:text-primary/90"
+              className="font-medium text-blue-600 hover:text-blue-500 whitespace-nowrap"
             >
               Forgot your password?
             </Link>

@@ -22,7 +22,6 @@ export interface UpdateTicketData {
   status?: TicketStatus;
 }
 
-// Mock tickets data stored in memory
 let mockTickets: Ticket[] = [
   {
     id: "1",
@@ -53,7 +52,6 @@ let mockTickets: Ticket[] = [
   },
 ];
 
-// Utility functions for ticket management
 export const ticketService = {
   getTickets: (userId: string): Promise<Ticket[]> => {
     // Simulate API call delay
