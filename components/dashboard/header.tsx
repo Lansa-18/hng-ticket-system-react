@@ -14,7 +14,7 @@ export function DashboardHeader() {
 
   return (
     <header className="bg-white shadow">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 sm:py-6 gap-4 sm:gap-0">
           <div className="flex items-center w-full sm:w-auto justify-between sm:justify-start space-x-4 sm:space-x-8">
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900">

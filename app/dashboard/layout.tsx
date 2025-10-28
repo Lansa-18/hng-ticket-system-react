@@ -13,7 +13,7 @@ export default function DashboardLayout({
     <ProtectedRoute>
       <div className="flex flex-col min-h-screen bg-gray-50">
         <DashboardHeader />
-        <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+        <main className="flex-1 max-w-[90rem] w-full mx-auto p-4 sm:p-6 lg:p-8">
           {children}
         </main>
         <Footer />
